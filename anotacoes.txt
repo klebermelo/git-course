@@ -1,0 +1,378 @@
+DOCKER
+
+
+docker build -t nginx-index .
+
+esse ponto no final representa a leitura de um arquivo Dockerfile criado para gerar uma imagem
+
+==========================================================
+==========================================================
+
+criar um arquivo "docker-compose.yaml"
+
+-> executar o comando para subir os containers
+	docker-compose up -d 
+
+para subir os serviços informados no arquivo acima
+
+
+-> baixar os containers
+docker-compose down
+
+
+
+A microsoft tem imagens disponíveis no site do docker, como essas
+
+https://hub.docker.com/r/microsoft/dotnet/
+
+https://hub.docker.com/r/microsoft/windowsservercore/
+
+Também há conteúdo no na documentação da microsoft de como usá-las.
+
+https://docs.microsoft.com/pt-br/dotnet/core/docker/
+
+
+
+==========================================================
+==========================================================
+
+
+--> Descomplicando o ArgoCD e o GitOps!
+https://www.youtube.com/watch?v=TDvA2vAQCF8
+
+Define que o repo GIT é o TODO PODEROSO, tudo que está lá irá para PROD
+
+
+HELM
+
+
+
+
+
+==========================================================
+==========================================================
+
+    6  cat /etc/sysconfig/network-scripts/ifcfg-enp0s3 
+    8  ifup enp0s3
+   10  ip a
+   14  yum update
+   19  vi /etc/hostname 
+   20  hostnamectl 
+   23  hostnamectl set-hostname docker
+   27  ss -ptln
+   28  yum install ssh vim
+   29  vim /etc/ssh/sshd_config 
+   31  systemctl restart sshd
+
+=========================
+
+   32  yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+   
+   33  yum install -y yum-utils
+   
+   34  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   
+   35  yum update
+   
+   36  yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   
+   37  systemctl start docker
+   38  systemctl status docker
+   44  systemctl enable docker
+   39  docker run hello-world
+   40  docker ps
+
+219  yum install curl
+  220  curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  221  chmod +x /usr/local/bin/docker-compose
+  222  ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+  223  docker-compose --version
+
+  =========================
+
+   42  docker images
+   46  docker search nginx
+   47  docker search apache
+   48  docker run -d -p 8080:80 --name nginx-teste nginx
+
+   51  yum install net-tools -y
+   52  netstat -ptln
+
+   54  docker stop nginx-teste
+   55  docker rm nginx-teste
+   56  docker ps
+   57  docker list
+   58  docker run -d -p 8080:80 --name teste nginx
+   59  docker exec -it teste /bin/bash
+   60  docker ps
+   61  docker exec -it teste /bin/bash
+   62  docker -v
+   63  docker run hello-world
+   64  docker images
+   65  docker rmi
+   66  docker images
+   67  docker rmi hello-world
+   68  docker ps
+   69  docker stop teste
+   70  docker rmi hello-world
+   71  docker rmi 9c7a54a9a43c
+   72  docker ps
+   73  docker rm teste
+   74  docker rmi 9c7a54a9a43c
+   75  docker rmi hello-world
+   76  docker ps
+   77  systemctl stop docker
+   78  docker ps
+   79  docker images
+   80  systemctl stop docker
+   81  docker images
+   82  docker rmi hello-world:latest
+   83  docker stop 49a75fc1f1b7
+   84  docker rmi hello-world:latest
+   85  docker stop 49a75fc1f1b7
+   86  docker exec -it 49a75fc1f1b7 /bin/bash
+   87  docker ps
+   88  docker images
+   89  docker rmi hello-world:latest
+   90  docker rmi hello-world
+   91  reboot
+   92  docker rmi hello-world
+   93  ls
+   94  echo $!
+   95  ps aux | sort -k 4 -r | head -n 5
+   96  docker ps
+   97  docker rmi hello-world
+   98  docker run hello-world
+   99  docker ps -a
+  100  docker rm 435f58d25a8c
+  101  docker ps -a
+  102  docker rm 2a02ae8894c7 49a75fc1f1b7
+  103  docker rmi hello-world
+  104  docker images
+  105  docker run -it ubuntu bash
+  106  docker ps
+  107  docker ps -a
+  108  docker run nginx
+  109  docker ps -a
+  110  docker run -d -p 8080:80 --name teste nginx
+  111  docker exec -ti teste bash
+  112  docker ps
+  113  docker stop teste
+  114  docker ps
+  115  docker ps -a
+  116  docker run -d -p 8080:80 --name teste nginx
+  117  docker start teste
+  118  docker stop teste
+  119  docker ps -a
+  120  docker rm 3a25f9e2a4a2 d8a92e68f839 b51f4f616e13
+  121  docker ps -a
+  122  docker images
+  123  docker rmi ubuntu
+  124  docker ps -a
+  125  docker images
+  126  pwd
+  127  mkdir /teste
+  128  cd /teste/
+  129  ls
+  130  docker run -d -p 8080:80 -v $PWD/html:/usr/share/nginx/html --name teste nginx
+  131  mkdir html
+  132  ls
+  133  cd html/
+  134  ls
+  135  vim index.html
+  136  pwd
+  137  ls
+  138  ls -la
+  139  ls -lah
+  140  docker ps
+  141  docker ps -
+  142  docker ps -a
+  143  history 
+  144  ls
+  145  cd ..
+  146  ls
+  147  vim Dockerfile
+  148  ls
+  149  docker build -t kleber/nginx:index .
+  150  docker images
+  151  docker ps
+  152  docker stop teste
+  153  ls
+  154  docker ps -a
+  155  docker ps -a | tail -n2
+  156  docker ps -a | grep -v CONTAINER
+  157  docker ps -a | grep -v CONTAINER | awk '{print $1}'
+  158  docker rm $(docker ps -a | grep -v CONTAINER | awk '{print $1}')
+  159  docker ps -a
+  160  docker ps 
+  161  docker run 8080:80 kleber/nginx:index
+  162  docker images
+  163  docker run -p 8080:80 kleber/nginx:index
+  164  docker ps 
+  165  docker ps -a
+  166  docker rm $(docker ps -a | grep -v CONTAINER | awk '{print $1}')
+  167  docker run -p 8080:80 kleber/nginx:index
+  168  netstat -ptln
+  169  docker run -p 8080:80 kleber/nginx
+  170  docker images
+  171  docker run -p 8080:80 kleber/nginx:index
+  172  history 20
+  173  history 
+  174  cat Dockerfile 
+  175  ls
+  176  ls html/
+  177  vim Dockerfile 
+  178  docker images
+  179  docker rmi 37e228233a8f
+  180  docker ps -a
+  181  docker rm $(docker ps -a | grep -v CONTAINER | awk '{print $1}')
+  182  docker rmi 37e228233a8f
+  183  docker images
+  184  docker build -t nginx-index .
+  185  docker images
+  186  docker run -p 8080:80 nginx-index
+  187  history -w
+  188  history 
+  189  docker images
+  190  docker run -p 8000:80 wesleywillians/nginxfc
+  191  docker ps -a
+  192  docker rm $(docker ps -a | grep -v CONTAINER | awk '{print $1}')
+  193  docker ps -a
+  194  docker run -p 8000:80 wesleywillians/nginxfc
+  195  uname -a
+  196  ip a
+  197  ping -4 uol.com.br -c4
+  198  docker ps -a
+  199  ls
+  200  vim Dockerfile 
+  201  history |grep Docker
+  202  cat Dockerfile 
+  203  history |grep compose
+  204  history |grep build
+  205  history |grep -i Dockerfile
+  206  vim Dockerfile 
+  207  vim anotacoes.txt
+  208  ls
+  209  vim docker-compose.yaml
+  210  ls -l
+  211  alias ls='ls -lh --color'
+  212  ls
+  213  echo "alias ls='ls -lh --color'" >> /root/.bashrc 
+  214  cat /root/.bashrc 
+  215  ls
+  
+
+  224  docker-compose up -d 
+  225  vim docker-compose.yaml 
+  226  docker-compose up -d 
+  227  docker ps
+  228  docker-compose exec mysql bash
+  229  docker ps
+  230  docker ps -a
+  231  ls
+  232  ls mysql/
+  233  du -sh mysql/
+  234  ls
+  235  vim  /root/.bashrc 
+  236  .  /root/.bashrc 
+  237  ll
+  238  pwd
+  239  ll ..
+  240  history 20
+  241  vim anotacoes.txt 
+  242  history >> anotacoes.txt 
+
+==========================================================
+==========================================================
+
+
+## Portas do K8S ##
+
+-> Control Plane - k8s
+
+api server - porta 6443
+etcd server - portas 2379-2380
+kubelet - porta 10250
+scheduler - porta 10251
+controller - porta 10252
+
+-> Worker
+
+kubelet - porta 10250
+nodeport - porta 30000 a 32767
+
+Pod -> menor unidade
+
+Deployment -> controller do Replica Set
+
+Replica Set - principal controller -  garantir as réplicas da aplicação
+
+Services - encaminha as requisições para os Pods
+    nodeport
+    load balancer
+    cluster IP
+
+Endpoint - sabe o endereço de cada Pod
+
+node
+
+control plane
+
+etcd
+
+scheduler
+
+controlle rmanager
+
+kubelet
+
+kube proxy
+
+eks
+aks
+
+namespace
+
+cgroup
+
+kubectl - comando para interagir com  k8s
+
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+
+
+
+
+
+
+
+
+[root@kubernetes ~]# kubectl run --image nginx --port 80 giropops --dry-run=client -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: giropops
+  name: giropops
+spec:
+  containers:
+  - image: nginx
+    name: giropops
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
+
+
+
